@@ -36,7 +36,7 @@
 
               <?php
 
-$sql = "SELECT * from movies ORDER BY year_made ASC;";
+$sql = "SELECT * from movies order by year_made;";
 $result = $db->query($sql);
 
                 if ($result->num_rows > 0) {

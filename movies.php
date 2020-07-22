@@ -36,10 +36,7 @@
 
               <?php
 
-$sql = "SELECT * from movies ORDER BY year_made ASC;";
-
-$db->set_charset("utf8");
-
+$sql = "SELECT * from movies order by year_made ASC;";
 $result = $db->query($sql);
 
                 if ($result->num_rows > 0) {
@@ -71,7 +68,6 @@ $result = $db->query($sql);
     $(document).ready( function () {
         
         $('#info').DataTable( {
-            "lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
             dom: 'lfrtBip',
             buttons: [
                 'copy', 'excel', 'csv', 'pdf'

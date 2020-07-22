@@ -1,8 +1,8 @@
 <?php
 
-  $nav_selected = "PEOPLE"; 
+  $nav_selected = "MOVIES"; 
   $left_buttons = "YES"; 
-  $left_selected = "PEOPLE"; 
+  $left_selected = "keyword"; 
 
   include("./nav.php");
   global $db;
@@ -13,9 +13,9 @@
 <div class="right-content">
     <div class="container">
 
-      <h3 style = "color: #01B0F1;">People -> People List</h3>
+      <h3 style = "color: #01B0F1;">Movies -> Movies List with extended data</h3>
 
-        <h3><img src="images/people.png" style="max-height: 35px;" />People List</h3>
+        <h3><img src="images/movies.png" style="max-height: 35px;" />Movies List with extended data</h3>
 
         <table id="info" cellpadding="0" cellspacing="0" border="0"
             class="datatable table table-striped table-bordered datatable-style table-hover"
@@ -23,30 +23,36 @@
               <thead>
                 <tr id="table-first-row">
                         <th>id</th>
-                        <th>Screen Name </th>
-                        <th>First Name</th>
-                        <th>Middle Name</th>
-                        <th>Last Name</th>
-                        <th>Image </th>
+                        <th>movie keyword</th>
+                       
+
+
+
+
+
                 </tr>
               </thead>
+
               <tbody>
 
               <?php
 
-$sql = "SELECT * from people ORDER BY first_name ASC;";
+$sql = "SELECT * from movie_keywords   where  movie_id = movie_id;";
+
+// TODO: The above SQL statement becomes a  JOIN between movies and movie_data
+// If there is no corresponding movie_data, then show those as blanks
+//NOTE: Whenever you see ., that means + in PHP
+
 $result = $db->query($sql);
 
                 if ($result->num_rows > 0) {
                     // output data of each row
+                    // Add four more rows of data which you are getting from the database
                     while($row = $result->fetch_assoc()) {
                         echo '<tr>
-                                <td>'.$row["id"].'</td>
-                                <td>'.$row["screen_name"].' </span> </td>
-                                <td>'.$row["first_name"].'</td>
-                                <td>'.$row["middle_name"].'</td>
-                                <td>'.$row["last_name"].'</td>
-                                <td>'.$row["image_name"].'</td>
+                                <td>'.$row["movie_id"].'</td>
+                                <td>'.$row["keyword"].' </span> </td>
+                              
                             </tr>';
                     }//end while
                 }//end if

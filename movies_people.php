@@ -1,8 +1,8 @@
 <?php
 
-  $nav_selected = "PEOPLE"; 
+  $nav_selected = "MOVIES"; 
   $left_buttons = "YES"; 
-  $left_selected = "PEOPLE"; 
+  $left_selected = "people"; 
 
   include("./nav.php");
   global $db;
@@ -13,40 +13,54 @@
 <div class="right-content">
     <div class="container">
 
-      <h3 style = "color: #01B0F1;">People -> People List</h3>
+      <h3 style = "color: #01B0F1;">Movies -> Movies List with Songs</h3>
 
-        <h3><img src="images/people.png" style="max-height: 35px;" />People List</h3>
+        <h3><img src="images/movies.png" style="max-height: 35px;" />Movies List with Songs</h3>
 
         <table id="info" cellpadding="0" cellspacing="0" border="0"
             class="datatable table table-striped table-bordered datatable-style table-hover"
             width="100%" style="width: 100px;">
               <thead>
                 <tr id="table-first-row">
-                        <th>id</th>
-                        <th>Screen Name </th>
-                        <th>First Name</th>
-                        <th>Middle Name</th>
-                        <th>Last Name</th>
-                        <th>Image </th>
+                        <th>movie id</th>
+                        <th>people id</th>
+                        <th>role</th>
+                        <th>screen name</th>
+                        <th>first name</th>
+                        <th>middle name</th>
+                        <th>last name</th>
+                        <th>gender</th>
+                        <th>image name</th>
+                        
+                      
                 </tr>
               </thead>
+
               <tbody>
 
               <?php
 
-$sql = "SELECT * from people ORDER BY first_name ASC;";
+$sql = "SELECT * from people natural join movie_people where  movie_id = $movie_id;";
+
+
+
 $result = $db->query($sql);
 
                 if ($result->num_rows > 0) {
                     // output data of each row
+                    // Add four more rows of data which you are getting from the database
                     while($row = $result->fetch_assoc()) {
                         echo '<tr>
-                                <td>'.$row["id"].'</td>
-                                <td>'.$row["screen_name"].' </span> </td>
+                                <td>'.$row["movie_id"].'</td>
+                                <td>'.$row["people_id"].' </span> </td>
+                                <td>'.$row["role"].'</td>
+                                <td>'.$row["screen_name"].'</td>
                                 <td>'.$row["first_name"].'</td>
                                 <td>'.$row["middle_name"].'</td>
                                 <td>'.$row["last_name"].'</td>
+                                <td>'.$row["gender"].'</td>
                                 <td>'.$row["image_name"].'</td>
+                                
                             </tr>';
                     }//end while
                 }//end if
